@@ -1,13 +1,8 @@
 package it.unibo.mvc;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Random;
 
 /**
@@ -29,8 +24,19 @@ public class MiniGUI {
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        /**
+         * Part 1
+         */ 
+        final JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.X_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        myPanel.add(write);
+        canvas.add(myPanel, BorderLayout.CENTER);
+        /**
+         * Part 2
+         */
+        final JTextField result = new JTextField();
+        canvas.add(result, BorderLayout.NORTH);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -39,12 +45,14 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+                int i = randomGenerator.nextInt();
+                System.out.println(i);
+                result.setText("Result: " + i);
             }
         });
-    }
-
-    private void display() {
+        }
+        
+        private void display() {
         /*
          * Make the frame one fifth the resolution of the screen. This very
          * method is enough for a single screen setup. In case of multiple
