@@ -7,7 +7,6 @@ package it.unibo.functional.api;
  * @param <O> the output type
  */
 public interface Function<I, O> {
-
     /**
      * Calls the function.
      *
@@ -23,7 +22,13 @@ public interface Function<I, O> {
      * @param <T> the input (and output) type of the function
      */
     static <T> Function<T, T> identity() {
-        return null;
+        return new Function<T, T>() {
+            @Override
+            public T call(final T input) {
+                // TODO Auto-generated method stub
+                return input;
+            }
+        };
     }
 
 }
